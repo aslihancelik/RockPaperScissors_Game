@@ -1,20 +1,90 @@
 // RockPaperScissors_Game.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+// 1: Rock
+// 2: Paper
+// 3: Scissors
 
 #include <iostream>
+#include <random>
+#include <string>
+
+using namespace std;
+
+// Function to generate computer's choice
+int generateComputerChoice() {
+    // Random number engine 
+    random_device engine;
+    // Distribution object 
+    uniform_int_distribution<int> computerValue(1, 3);
+    return computerValue(engine);
+}
+
+// Function to convert number to choice name 
+string choiceName(int choice){
+    switch (choice) {
+        case 1: return "rock";
+        case 2: return "paper";
+        case 3: return "scissors";
+        default: return "";
+    }
+}
+
+// Function to determine the winner
+string game(int userChoice, int computerChoice) {
+
+    if (userChoice == computerChoice) {
+        return "It's a tie!";
+    }
+    else if ((userChoice == 1 && computerChoice == 3) ||
+        (userChoice == 2 && computerChoice == 1) ||
+        (userChoice == 3 && computerChoice == 2)) {
+        return "You win!";
+    }
+    else {
+        return "Computer wins!";
+    }
+}
+
+// Function to get user's choice
+int getUserChoice() {
+    string input;
+    cout << "Please enter one of the following as your choice then hit enter: rock, paper or scissors." << endl;
+    cin >> input;
+
+    if (input == "rock") return 1;
+    if (input == "paper") return 2;
+    if (input == "scissors") return 3;
+
+    //Invalid choice
+    return 0;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    int computerChoice;
+    int userChoice;
+
+    while (true) {
+        computerChoice = generateComputerChoice();
+        userChoice = getUserChoice();
+
+        //Check for invalid choice
+        if (userChoice == 0) {
+            cout << "Invalid choice, please try again." << endl; 
+            continue;
+        }
+        cout << "Computer chose: " << choiceName(computerChoice) << endl;
+        cout << game(userChoice, computerChoice) << endl;
+        string playAgain; 
+        cout << "Do you want to play again? (yes/no): ";
+        cin >> playAgain;
+        if (playAgain != "yes") {
+            break;
+        }
+    } 
+    return 0;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+  
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
