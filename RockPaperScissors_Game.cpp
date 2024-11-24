@@ -33,7 +33,7 @@ string choiceName(int choice){
 string game(int userChoice, int computerChoice) {
 
     if (userChoice == computerChoice) {
-        return "It's a tie!";
+        return "tie";
     }
     else if ((userChoice == 1 && computerChoice == 3) ||
         (userChoice == 2 && computerChoice == 1) ||
@@ -63,6 +63,8 @@ int main()
 {
     int computerChoice;
     int userChoice;
+    string playAgain;
+    string result;
 
     while (true) {
         computerChoice = generateComputerChoice();
@@ -74,8 +76,12 @@ int main()
             continue;
         }
         cout << "Computer chose: " << choiceName(computerChoice) << endl;
-        cout << game(userChoice, computerChoice) << endl;
-        string playAgain; 
+        result = game(userChoice, computerChoice);
+        if (result == "tie") {
+            cout << "It's a tie! Play one more round to determine the winner." << endl;
+            continue;
+        }
+        cout << result << endl;
         cout << "Do you want to play again? (yes/no): ";
         cin >> playAgain;
         if (playAgain != "yes") {
