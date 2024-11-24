@@ -1,6 +1,7 @@
 // RockPaperScissors_Game.cpp : This file contains the 'main' function. Program execution begins and ends there.
 // 
-// This is a rock paper scissors game played with the computer. User enters their choice and the computer randomly 
+// This the revised version of the rock paper scissors game played with the computer.
+// User enters their choice and the computer randomly 
 // generates an integer between 1 and 3. The numbers corresponds to the choices as follows:
 //
 // 1: Rock
@@ -13,7 +14,8 @@
 //      If one player chooses paper and the computer chooses rock, then paper wins. (Paper wraps rock.)
 //      If both the player and the computer make the same choice, the game must be played again to determine the winner.
 //
-// The program displays the winner and asks the user if they would like to play again.
+// The program displays the winner and asks the user if they would like to play again. The program keeps track of how many 
+// times the user have won and let the user know.
 //
 //
 // Programmer: Aslihan Aria Celik
