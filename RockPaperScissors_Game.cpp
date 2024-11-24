@@ -82,6 +82,7 @@ int getUserChoice() {
 
 // Function to play one round of the game
 bool playRound(string playerName, int& playerWins) {
+
     int computerChoice = generateComputerChoice();
     int userChoice = getUserChoice();
 
@@ -126,6 +127,7 @@ int main()
 
         bool isTieOrInvalid = playRound(playerName, playerWins); 
         
+        // go through the loop again if the user input is invalid or there is a tie between the user and the computer
         if (isTieOrInvalid) {
             continue; 
         }
