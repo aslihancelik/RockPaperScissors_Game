@@ -80,37 +80,61 @@ int getUserChoice() {
     return 0;
 }
 
+// Function to play one round of the game
+bool playRound(string playerName, int& playerWins) {
+    int computerChoice = generateComputerChoice();
+    int userChoice = getUserChoice();
+
+    //Check for invalid choice
+    if (userChoice == 0) {
+        cout << "Invalid choice, please try again." << endl;
+        return true;
+    }
+    //Display computer's choice
+    cout << "Computer chose: " << choiceName(computerChoice) << endl;
+
+    // Determine and display the game result
+    string result = game(userChoice, computerChoice);
+
+    //If it is a tie, prompt to play again
+    if (result == "tie") {
+        cout << "It's a tie! Play one more round to determine the winner." << endl;
+        return true;
+    }
+    // Display the result of the game
+    cout << result << endl;
+
+    // Update player's win count if they win 
+    if (result == "You win!") { 
+        playerWins++; 
+    } 
+    return false;
+}
+
+
 int main()
 {
-    int computerChoice;
-    int userChoice;
+    string playerName; 
+    int playerWins = 0;
     string playAgain;
-    string result;
+   
+    // Get player's name 
+    cout << "Enter your name: "; 
+    cin >> playerName;
 
     while (true) {
-        computerChoice = generateComputerChoice();
-        userChoice = getUserChoice();
 
-        //Check for invalid choice
-        if (userChoice == 0) {
-            cout << "Invalid choice, please try again." << endl; 
-            continue;
+        bool isTieOrInvalid = playRound(playerName, playerWins); 
+        
+        if (isTieOrInvalid) {
+            continue; 
         }
-        //Display computer's choice
-        cout << "Computer chose: " << choiceName(computerChoice) << endl;
 
-        // Determine and display the game result
-        result = game(userChoice, computerChoice);
-
-        //If it is a tie, prompt to play again
-        if (result == "tie") {
-            cout << "It's a tie! Play one more round to determine the winner." << endl;
-            continue;
-        }
-        // Display the result of the game
-        cout << result << endl;
-
+        // Prompt the user to play again or not 
+        cout << playerName << ", you have won " << playerWins << " times." << endl;
+        
         // Prompt the user to play again or not
+        // Here the sentinel value is "no" which serves the purpose of ending the game
         cout << "Do you want to play again? (yes/no): ";
         cin >> playAgain;
 
@@ -119,6 +143,8 @@ int main()
             break;
         }
     } 
+    // Display final results 
+    cout << "Thank you for playing, " << playerName << "! You won " << playerWins << " times." << endl;
     return 0;
 }
 
